@@ -1,137 +1,123 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Stock Market Trend — README</title>
   <style>
-    body {font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;line-height:1.6;color:#0f172a;padding:2rem;max-width:900px;margin:0 auto;background:#f8fafc}
-    header{margin-bottom:1.5rem}
-    h1{font-size:2rem;margin:0 0 .25rem}
-    p.lead{color:#334155;margin:0 0 1rem}
-    pre, code{background:#0b1220;color:#e6eef8;padding:.25rem .5rem;border-radius:.375rem;overflow:auto}
-    .card{background:white;border:1px solid #e6eef8;padding:1rem;border-radius:.5rem;margin-bottom:1rem;box-shadow:0 4px 14px rgba(2,6,23,.04)}
-    ul{margin:0 0 1rem 1.25rem}
-    .cmd{display:inline-block;background:#eef2ff;padding:.15rem .4rem;border-radius:.25rem}
-    footer{font-size:.9rem;color:#475569;margin-top:1.5rem}
-    .badge{display:inline-block;padding:.25rem .5rem;border-radius:999px;border:1px solid #e2e8f0;margin-right:.5rem;font-size:.85rem}
+    body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6;padding:28px;color:#111}
+    h1{font-size:28px;margin-bottom:6px}
+    h2{font-size:18px;margin-top:20px}
+    code{background:#f4f4f4;padding:2px 6px;border-radius:4px}
+    pre{background:#f8f8f8;padding:12px;border-radius:6px;overflow:auto}
+    ul{margin:8px 0 16px 20px}
   </style>
 </head>
 <body>
-  <header>
-    <h1>📈 Stock Market Trend — Google Colab Project</h1>
-    <p class="lead">An end-to-end Google Colab notebook that analyzes historic stock data, extracts features, trains models to detect/forecast trends, and provides interactive visualizations suitable for a data‑science portfolio.</p>
-    <div>
-      <span class="badge">Colab</span>
-      <span class="badge">Python</span>
-      <span class="badge">pandas</span>
-      <span class="badge">scikit-learn</span>
-      <span class="badge">plotly</span>
-    </div>
-  </header>
+  <h1>Stock Market Trend — Google Colab Project</h1>
+  <p><strong>Short summary (point-to-point)</strong></p>
+  <ul>
+    <li>Objective: Analyze historical stock prices and detect/predict trends using time-series & ML models.</li>
+    <li>Primary deliverable: Google Colab notebook(s) that run end-to-end (data → EDA → features → model → evaluation → visualizations).</li>
+    <li>Target audience: Data scientists, finance students, portfolio managers, GitHub visitors.</li>
+  </ul>
 
-  <section class="card">
-    <h2>What this project does</h2>
-    <ul>
-      <li>Loads historical OHLCV stock data (CSV / yfinance).</li>
-      <li>Performs cleaning, resampling, and feature engineering (technical indicators, rolling stats).</li>
-      <li>Visualizes price action and indicators interactively (Plotly).</li>
-      <li>Fits classification/regression models (random forest, XGBoost optional) to predict short-term trend or future return.</li>
-      <li>Provides model evaluation (confusion matrix, ROC, backtest-style walk-forward evaluation).</li>
-      <li>Exports results and model artifacts for portfolio display.</li>
-    </ul>
-  </section>
+  <h2>Key features</h2>
+  <ul>
+    <li>Download stock data (Yahoo Finance / Alpha Vantage / Kaggle CSV)</li>
+    <li>Exploratory data analysis (price, returns, volume, rolling stats)</li>
+    <li>Technical indicators (SMA, EMA, RSI, MACD, Bollinger Bands)</li>
+    <li>Time-series models: ARIMA / SARIMA, Facebook Prophet</li>
+    <li>Machine learning models: Random Forest, XGBoost, LSTM (sequence model)</li>
+    <li>Backtesting basic rule-based strategy (e.g., moving-average crossover)</li>
+    <li>Performance evaluation (MSE, RMSE, MAE, directional accuracy, Sharpe ratio)</li>
+    <li>Interactive visualizations (plotly / matplotlib) and downloadable charts</li>
+  </ul>
 
-  <section class="card">
-    <h2>Repository structure</h2>
-    <pre>
-/ (root)
-├─ README.html           ← this file
-├─ notebook.ipynb        ← primary Colab notebook (open with Colab)
-├─ data/                 ← sample CSV(s) used for experiments
-├─ notebooks/            ← exploratory notebooks (optional)
-├─ requirements.txt      ← pip dependencies
-└─ assets/               ← images/screenshots for README or report
-    </pre>
-  </section>
+  <h2>Dataset (point-to-point)</h2>
+  <ul>
+    <li>Source options: Yahoo Finance (via yfinance), Alpha Vantage API, Kaggle CSVs</li>
+    <li>Columns used: Date, Open, High, Low, Close, Adj Close, Volume</li>
+    <li>Timeframe: configurable (e.g., 5y, 10y, custom)</li>
+  </ul>
 
-  <section class="card">
-    <h2>How to run (Google Colab)</h2>
-    <ol>
-      <li>Open the notebook in Colab: click <code class="cmd">Open in Colab</code> button (or upload <code>notebook.ipynb</code> to Colab).</li>
-      <li>Install dependencies (first cell runs <code>!pip install -r requirements.txt</code> or individual packages).</li>
-      <li>Mount Google Drive if you want to load/save large datasets: <code>from google.colab import drive; drive.mount('/content/drive')</code>.</li>
-      <li>Set dataset path or enable <code>yfinance</code> to download historic data automatically.</li>
-      <li>Run cells sequentially. Visualizations are interactive inside Colab outputs.</li>
-    </ol>
-  </section>
+  <h2>Preprocessing steps</h2>
+  <ul>
+    <li>Resample or align timestamps (daily / weekly / monthly)</li>
+    <li>Handle missing values (forward-fill / interpolation)</li>
+    <li>Generate features: returns, log-returns, rolling means, volatility</li>
+    <li>Scale features for ML (StandardScaler / MinMax for LSTM)</li>
+    <li>Train-test split: time-based (no random shuffle)</li>
+  </ul>
 
-  <section class="card">
-    <h2>Example usage (code snippet)</h2>
-    <pre><code># load data
-import pandas as pd
-from datetime import datetime
+  <h2>Notebook structure (point-to-point)</h2>
+  <ul>
+    <li>0. Setup & requirements (pip install lines)</li>
+    <li>1. Data download & preview</li>
+    <li>2. EDA & summary statistics</li>
+    <li>3. Feature engineering & technical indicators</li>
+    <li>4. Modeling (baseline → classical → ML → deep learning)</li>
+    <li>5. Backtesting & strategy simulation</li>
+    <li>6. Results, plots, and model comparison</li>
+    <li>7. Export predictions / model artifacts</li>
+  </ul>
 
-df = pd.read_csv('data/AAPL_2015-2024.csv', parse_dates=['Date']).set_index('Date')
+  <h2>How to run (Colab) — quick steps</h2>
+  <ul>
+    <li>Open the notebook in Google Colab (link in repo).</li>
+    <li>Run the setup cell to install dependencies (example: <code>!pip install yfinance prophet tensorflow scikit-learn plotly</code>).</li>
+    <li>Set API keys if using Alpha Vantage (store in environment variables or Colab secrets).</li>
+    <li>Execute cells top-to-bottom; adjust config cells (ticker, timeframe, model hyperparams).</li>
+  </ul>
 
-# compute moving avg
-df['ma_20'] = df['Close'].rolling(20).mean()
+  <h2>Models & evaluation (point-to-point)</h2>
+  <ul>
+    <li>Baseline: naive walk-forward (previous close)</li>
+    <li>Statistical: ARIMA / SARIMA (grid search for p,d,q)</li>
+    <li>Prophet: trend + seasonality modeling</li>
+    <li>ML: RandomForest / XGBoost on engineered features</li>
+    <li>DL: LSTM on sequences (scaled inputs)</li>
+    <li>Evaluation metrics: RMSE, MAE, MAPE, Directional Accuracy, Precision/Recall for up/down classification</li>
+  </ul>
 
-# create simple label: 1 if 5-day forward return > 0 else 0
-future_return = df['Close'].shift(-5) / df['Close'] - 1
-df['label'] = (future_return > 0).astype(int)
+  <h2>Results & visualizations (point-to-point)</h2>
+  <ul>
+    <li>Price vs. prediction overlay plots</li>
+    <li>Error distribution & rolling error</li>
+    <li>Feature importance (tree models)</li>
+    <li>Strategy equity curve & drawdown plot</li>
+    <li>Confusion matrix for directional predictions</li>
+  </ul>
 
-# train/test split and model training in notebook
-    </code></pre>
-  </section>
+  <h2>File structure (suggested)</h2>
+  <ul>
+    <li><code>/notebooks</code> — Colab notebooks (.ipynb)</li>
+    <li><code>/data</code> — sample CSVs (not large files)</li>
+    <li><code>/src</code> — helper scripts (data.py, features.py, models.py)</li>
+    <li><code>/reports</code> — saved plots & results</li>
+    <li><code>requirements.txt</code>, <code>README.html</code></li>
+  </ul>
 
-  <section class="card">
-    <h2>Dependencies</h2>
-    <ul>
-      <li>Python 3.9+</li>
-      <li>pandas, numpy</li>
-      <li>scikit-learn</li>
-      <li>plotly (interactive charts)</li>
-      <li>yfinance (optional) or use your CSV</li>
-      <li>xgboost (optional)</li>
-    </ul>
-    <p>Install with:</p>
-    <pre>!pip install -r requirements.txt</pre>
-  </section>
+  <h2>Tips & best practices (point-to-point)</h2>
+  <ul>
+    <li>Always use time-based splits (no random shuffles).</li>
+    <li>Be cautious: models may overfit historical noise — use walk-forward validation.</li>
+    <li>Normalize/scale training and test sets properly (fit scaler only on train).</li>
+    <li>Track experiments (weights & parameters) using simple logs or MLflow.</li>
+  </ul>
 
-  <section class="card">
-    <h2>Modeling decisions & notes</h2>
-    <ul>
-      <li>Use rolling windows to avoid look-ahead bias.</li>
-      <li>Engineer features like returns, vol, moving averages, RSI, MACD.</li>
-      <li>Evaluate using time-series split / walk-forward validation, not random split.</li>
-      <li>Be explicit about transaction costs and slippage when backtesting.</li>
-    </ul>
-  </section>
+  <h2>How to contribute</h2>
+  <ul>
+    <li>Fork the repo → create a feature branch → make changes → open a PR.</li>
+    <li>Write clear commit messages and update README when adding features.</li>
+  </ul>
 
-  <section class="card">
-    <h2>Outputs</h2>
-    <ul>
-      <li>Interactive charts embedded in the notebook.</li>
-      <li>Model metrics: accuracy, precision/recall, AUC for classification or MAE/RMSE for regression.</li>
-      <li>CSV exports of predictions and a sample backtest P&L series.</li>
-    </ul>
-  </section>
+  <h2>License & contact</h2>
+  <ul>
+    <li>License: MIT (change as needed)</li>
+    <li>Contact: add your email or GitHub profile link</li>
+  </ul>
 
-  <section class="card">
-    <h2>Examples & Screenshots</h2>
-    <p>Place project screenshots in <code>assets/</code> and embed them in the notebook and README for portfolio presentation.</p>
-  </section>
-
-  <section class="card">
-    <h2>License & Contact</h2>
-    <p>MIT License by default — change as needed.</p>
-    <p>Author: Guddu Pandit (update / replace with your name & contact).</p>
-  </section>
-
-  <footer>
-    Last updated: September 18, 2025.  
-    <div>If you'd like, I can also: generate a polished markdown README.md version, add a Colab badge, or auto-create a requirements.txt and starter notebook cells — tell me which and I'll add them.</div>
-  </footer>
+  <p style="margin-top:22px">— End of README —</p>
 </body>
 </html>
